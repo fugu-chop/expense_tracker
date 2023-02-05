@@ -14,5 +14,5 @@ module ExpenseTracker
     
       post '/expenses', JSON.generate(coffee)
     end
-    end 
+  end 
 end
