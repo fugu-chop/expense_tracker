@@ -22,6 +22,8 @@ module ExpenseTracker
     
       # post method comes from Rack::Test::Methods
       post '/expenses', JSON.generate(coffee)
+
+      expect(last_response.status).to eq(200)
     end
   end 
 end
