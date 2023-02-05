@@ -1,6 +1,8 @@
 require 'rack/test'
 require 'json'
 
+# Nesting code in a module so we have access
+# to all relevant classes
 module ExpenseTracker
   RSpec.describe 'Expense Tracker API' do
     include Rack::Test::Methods
