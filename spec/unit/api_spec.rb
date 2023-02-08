@@ -17,13 +17,13 @@ module ExpenseTracker
 
     describe 'POST /expenses' do
       context 'when the expense is successfully recorded' do
-          let(:expense) = { 'some' => 'data' }
+        let(:expense) { { 'some' => 'data' } }
 
-          before do
+        before do
             allow(ledger).to receive(:record)
               .with(expense)
               .and_return(RecordResult.new(true, 417, nil))
-          end
+        end
 
         it 'returns the expense id' do
           # We don't move this into the before block
@@ -40,11 +40,6 @@ module ExpenseTracker
 
           expect(last_response.status).to eq(200)
         end
-      end
-
-      context 'when the expense fails validation' do
-        it 'returns an error message'
-        it 'responds with a 422 (Unprocessable entity)'
       end
     end
   end
