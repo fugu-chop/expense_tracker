@@ -13,6 +13,7 @@ module ExpenseTracker
 
     let(:ledger) { instance_double('ExpenseTracker::Ledger') }
     let(:expense) { { 'some' => 'data' } }
+    let(:parsed) { JSON.parse(last_response.body) }
 
     describe 'POST /expenses' do
       context 'when the expense is successfully recorded' do
@@ -27,7 +28,6 @@ module ExpenseTracker
           # as we typically keep act and assert in
           # the test itself
           post '/expenses', JSON.generate(expense)
-          parsed = JSON.parse(last_response.body)
           
           expect(parsed).to include('expense_id' => 417)
         end
@@ -49,7 +49,6 @@ module ExpenseTracker
         it 'returns an error message' do
           post '/expenses', JSON.generate(expense)
 
-          parsed = JSON.parse(last_response.body)
           expect(parsed).to include('error' => 'Expense incomplete')
         end
         
