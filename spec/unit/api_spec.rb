@@ -2,8 +2,6 @@ require_relative '../../app/api.rb'
 require 'rack/test'
 
 module ExpenseTracker
-  RecordResult = Struct.new(:success?, :expense_id, :error_message)
-  
   RSpec.describe API do
     # Rack::Test allows us to simulate and route
     # HTTP requests to and from our app
