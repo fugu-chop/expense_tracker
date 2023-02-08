@@ -39,7 +39,7 @@ module ExpenseTracker
             .and_return(RecordResult.new(true, 417, nil))
 
           post '/expenses', JSON.generate(expense)
-          expect(last_response).to eq(200)
+          expect(last_response.status).to eq(200)
         end
       end
 
