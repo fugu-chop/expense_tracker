@@ -27,9 +27,8 @@ module ExpenseTracker
 
         it 'returns the expense id' do
           # We don't move this into the before block
-          # as we want to be flexible - we wouldn't
-          # be able to handle XML related tests
-          # as those require different header values
+          # as we typically keep act and assert in
+          # the test itself
           post '/expenses', JSON.generate(expense)
           parsed = JSON.parse(last_response.body)
           
