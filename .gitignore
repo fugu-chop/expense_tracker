@@ -43,3 +43,6 @@ vignettes/*.pdf
 
 # Text files
 *.txt
+
+# DB files
+*.db
