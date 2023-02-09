@@ -67,13 +67,13 @@ module ExpenseTracker
         before do
             allow(ledger).to receive(:expenses_on)
               .with(valid_date)
-              .and_return(expense)
+              .and_return([expense])
         end
 
         it 'returns the expense records as JSON' do
           get "/expenses/#{valid_date}"
 
-          expect(parsed).to eq(expense)
+          expect(parsed).to include(expense)
         end
 
         it 'responds with a 200 (OK)' do
