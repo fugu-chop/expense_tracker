@@ -28,6 +28,7 @@ module ExpenseTracker
       if result.empty?
         JSON.generate([])
       else
+        JSON.generate(result)
       end
     end
   end
