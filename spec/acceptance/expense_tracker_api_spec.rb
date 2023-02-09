@@ -25,8 +25,6 @@ module ExpenseTracker
     end
 
     it 'records submitted expenses' do
-      pending 'Need to persist expenses'
-
       # Strings hash keys for compatibility
       coffee = post_expense(
         'payee' => 'Starbucks',
