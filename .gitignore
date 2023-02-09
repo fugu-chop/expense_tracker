@@ -45,4 +45,4 @@ vignettes/*.pdf
 *.txt
 
 # DB files
-*.db
+db/*.db
