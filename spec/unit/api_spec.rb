@@ -13,6 +13,8 @@ module ExpenseTracker
 
     let(:ledger) { instance_double('ExpenseTracker::Ledger') }
     let(:expense) { { 'some' => 'data' } }
+    let(:valid_date) { '2017-07-12' }
+    let(:invalid_date) { '2099-99-99' }
     let(:parsed) { JSON.parse(last_response.body) }
 
     describe 'POST /expenses' do
@@ -67,8 +69,23 @@ module ExpenseTracker
       end
 
       context 'when there are no expenses on the given date' do
-        it 'returns an empty array as JSON'
-        it 'responds with a 200 (OK)'
+        before do
+            allow(ledger).to receive(:expenses_on)
+              .with(invalid_date)
+              .and_return([])
+        end
+
+        it 'returns an empty array as JSON' do
+          get "/expenses/#{invalid_date}"
+
+          expect(JSON.parse(last_response.body)).to eq([])
+        end
+
+        it 'responds with a 200 (OK)' do
+          get "/expenses/#{invalid_date}"
+
+          expect(last_response.status).to eq(200)
+        end
       end
     end
   end
