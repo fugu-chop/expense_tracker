@@ -16,6 +16,12 @@ ENV['RACK_ENV'] = 'test'
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
+  # RSpec will conditionally load spec/support/db.rb if
+  # any examples are loaded with the :db tag
+  config.when_first_matching_example_defined(:db) do
+    require_relative 'support/db'
+  end
+
   # This enables us to filter out code from the following gems in a backtrace
   config.filter_gems_from_backtrace 'rack', 'rack-test', 'sequel', 'sinatra'
 
