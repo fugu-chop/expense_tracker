@@ -33,7 +33,31 @@ module ExpenseTracker
 
           expect(result).not_to be_success
           expect(result.expense_id).to eq(nil)
-          expect(result.error_message).to include('`payee` is required')
+          expect(result.error_message).to include('Invalid expense')
+          expect(DB[:expenses].count).to eq(0)
+        end
+      end
+
+      context 'when the expense has a negative amount' do
+        it 'rejects the expense as invalid' do
+          expense['amount'] = -30
+          result = ledger.record(expense)
+
+          expect(result).not_to be_success
+          expect(result.expense_id).to eq(nil)
+          expect(result.error_message).to include('Invalid expense')
+          expect(DB[:expenses].count).to eq(0)
+        end
+      end
+
+      context 'when the expense has an invalid date' do
+        it 'rejects the expense as invalid' do
+          expense['date'] = 'fh8392hf89'
+          result = ledger.record(expense)
+
+          expect(result).not_to be_success
+          expect(result.expense_id).to eq(nil)
+          expect(result.error_message).to include('Invalid expense')
           expect(DB[:expenses].count).to eq(0)
         end
       end
